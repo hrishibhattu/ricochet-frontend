@@ -5,7 +5,7 @@ name: QA CI
 # Controls when the workflow will run
 on:
   pull_request_target:
-    types: [reopened, opened, synchronize, edited]
+    types: [reopened, opened, synchronize, edited, closed]
     branches:
       - qa
 
