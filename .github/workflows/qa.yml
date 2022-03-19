@@ -57,6 +57,3 @@ jobs:
             `npm audit` security report:
 
             ${{ env.MESSAGE }}
-
-      - name: Create a preview environment
-        uses: Ricochet-Exchange/ricochet-frontend/.github/workflows/create-update-pr-env.yml@v2
