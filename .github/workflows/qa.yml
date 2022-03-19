@@ -61,7 +61,22 @@ jobs:
   on_pull_request_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
+    name: Deploy to IPFS
     steps:
-      - run: |
-          echo "Merged!"
+      - uses: actions/checkout@v2
+        with:
+          ref: 'qa'
+      - name: Deploy using fleek
+        id: deploy
+        uses: fleekhq/action-deploy@v1
+        with:
+          apiKey: ${{ secrets.FLEEK_API_KEY }}
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            - A test environment has been deployed using fleek, visit this url
+            - ${{ steps.deploy.outputs.deployUrl }}  **Markdown** :sparkles:
+            - Created by ricochet-CI
+          reactions: '+1'
