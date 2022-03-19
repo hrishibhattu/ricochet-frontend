@@ -29,17 +29,17 @@ jobs:
         with:
           node-version: 14
 
+      - name: Upgrade to latest npm version
+        run: npm install -g npm@^8.5.3
+
       - name: Install dependencies
         run: yarn install
 
       - name: Run ESLint
         run: yarn eslint . --ext .ts,.tsx
 
-      - name: Create package.lock
+      - name: Create package.lock (used by security audit)
         run: npm i --package-lock-only
-
-      - name: Install latest npm version
-        run: npm install -g npm@^8.5.3
 
       - name: Security Audit
         id: audit-report
