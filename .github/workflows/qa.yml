@@ -57,3 +57,11 @@ jobs:
             `npm audit` security report:
 
             ${{ env.MESSAGE }}
+
+    on_pull_request_merged:
+      if: github.event.pull_request.merged == true
+      runs-on: ubuntu-latest
+
+      steps:
+        - run: |
+            echo "Merged!"
